@@ -135,7 +135,14 @@ class _PostItemState extends State<PostItem> {
             ],
             if (imageUrl != null) ...[
               const SizedBox(height: 8),
-              ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.network(imageUrl)),
+              // FIX: Use FractionallySizedBox to make the image fill the width
+              FractionallySizedBox(
+                widthFactor: 1.0,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(imageUrl, fit: BoxFit.cover),
+                ),
+              ),
             ],
             // Stats and action buttons are at the bottom
             _buildPostStats(reactions),
